@@ -1,7 +1,18 @@
 package main
 
-import "fmt"
+import (
+	"log"
+
+	"github.com/myuron/lazycfn/pkg/app"
+)
 
 func main() {
-	fmt.Println("Hello world")
+	a, err := app.New()
+	if err != nil {
+		log.Fatalln(err)
+	}
+	defer a.Close()
+	if err := a.Run(); err != nil {
+		log.Fatalln(err)
+	}
 }
